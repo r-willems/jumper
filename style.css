@@ -1,27 +1,49 @@
-body{
-   align-content: center;
-   align-items: center;
+*{
+   padding: 0;
+   margin: 0;
 }
 
 #gameBox
 {
-   border: solid 2px red;
-   height: 200px;
-   width: 500px;
+   border: solid 3px green;
+   height: 300px;
+   width: 600px;
 
-   position: relative;
+}
 
-   overflow: hidden;
+#start
+{
+   position: sticky;
+   left: 220px;
+   margin-top: 20px;
+
+   border: lime inset;
+   background-color: black;
+   color: white;
 }
 
 #statBar
 {
    border: lime solid 2px;
-   width: 50px; height: 40px;
+   width: 64px; height: 50px;
    border-radius: 10%;
    position: sticky;
-   left: 225px;
+
+   display: inline-block;
+   vertical-align: top;
+
    top: 10px;
+   
+}
+.points
+{
+   flex: 1;
+   left: 150px;
+}
+.lives
+{
+   flex: 1;
+   left: 300px;
 }
 
 #sprite
@@ -37,18 +59,6 @@ body{
    
 }
 
-.jumpUp
-{
-   animation: 750ms infinite linear running jump;
-}
-
-@keyframes jump
-{
-   0%{top: 150px;}
-   30%{top: 100px;}
-   70%{top: 100px;}
-   100%{top: 150px;}
-}
 
 #block
 {
@@ -65,11 +75,11 @@ body{
    animation-duration: 6s;
    animation-timing-function: linear;
    animation-delay: 2s;
-   animation-iteration-count: infinite;*/
+   animation-iteration-count: infinite;
    
    
 
-   animation: 5s 500ms linear infinite running block;
+   animation: 5s 500ms linear infinite running block;*/
 
 }
 
