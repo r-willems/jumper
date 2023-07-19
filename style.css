@@ -1,6 +1,6 @@
 *{
    padding: 0;
-   margin: 0;
+   margin: 25px;
 }
 
 #gameBox
@@ -11,90 +11,8 @@
 
 }
 
-#start
-{
-   position: sticky;
-   left: 220px;
-   margin-top: 20px;
-
-   border: lime inset;
-   background-color: black;
-   color: white;
-}
-
-#statBar
-{
-   border: lime solid 2px;
-   width: 64px; height: 50px;
-   border-radius: 10%;
-   position: sticky;
-
-   display: inline-block;
-   vertical-align: top;
-
-   top: 10px;
-   
-}
-.points
-{
-   flex: 1;
-   left: 150px;
-}
-.lives
-{
-   flex: 1;
-   left: 300px;
-}
-
-#sprite
-{
-   width: 20px; height: 50px;
-   background-color: blue;
-
-   position: absolute;
-
-   left: 60px;
-   
-   top: 150px
-   
-}
 
 
-#block
-{
-   width: 20px; height: 20px;
-   background-color: yellowgreen;
 
-   position: absolute;
-   
-   bottom: 0px;
 
-   /*
-   animation: block;
-   
-   animation-duration: 6s;
-   animation-timing-function: linear;
-   animation-delay: 2s;
-   animation-iteration-count: infinite;
-   
-   
 
-   animation: 5s 500ms linear infinite running block;*/
-
-}
-
-/*.paused
-{
-   animation-name: block;
-   animation-play-state: paused;
-   border-radius: 50%;
-   
-}*/
-
-@keyframes block
-{
-   0%{left: 520px;}
-   100%{left: -20px;}
-
-   
-}
