@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  font-family: 'Press Start 2P', monospace;
+}
+
+
 *{
    padding: 0;
-   margin: 25px;
+   margin: 15px;
 }
 
 #gameBox
@@ -8,6 +15,8 @@
    border: solid 3px green;
    height: 300px;
    width: 600px;
+
+   font-family: "Press Start 2p", monospac;
 
 }
 

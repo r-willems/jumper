@@ -2,42 +2,39 @@
 
 let gameBoard = document.getElementById("gameBox");
 
-let nmySpd = 1;
-
 let points = 0;
 let lives = 6;
 let hit = false;
-
 let game = null;
 
 const ctx = gameBoard.getContext("2d");
 const sprite = {
-    x: 50,
-    y: 120,
-    width: 12,
-    height: 30,
-    jump: 25,
-    speed: 5
+    x: 220,
+    y: 260,
+    width: 20,
+    height: 40,
+    jump: 45,
+    speed: 6
 };
 
 const nemesis = {
-    x: 300,
-    y: 135,
-    width: 12,
-    height: 15,
-    speed: 5
+    x: 600,
+    y: 275,
+    width: 18,
+    height: 25,
+    speed: 2
 };
 
 
 document.addEventListener("keydown", stop=>{
-    if(stop.code === "Enter" && nmySpd != 0)
+    if(stop.code === "Enter" && nemesis.speed != 0)
     {
-        nmySpd = 0;
+        nemesis.speed = 0;
         console.log(`Nmy: Y${nemesis.y}, X${nemesis.x}`);
     }
-    else if (stop.code === "Enter" && nmySpd == 0)
+    else if (stop.code === "Enter" && nemesis.speed == 0)
     {
-        nmySpd = 1;
+        nemesis.speed = 1;
     }
 });
 
@@ -49,16 +46,52 @@ document.addEventListener("keydown", keyD =>{
     }
 } );
 
+function gameLoop() 
+{
+    ctx.clearRect(0, 0, gameBoard.width, gameBoard.height);
+    statusbar();
+    if (lives == 0)
+    {
+        ctx.fillStyle = "black";
+        ctx.fillText("You have died", 210, 80);
+        return; 
+    }
+    drawSprite();
+    drawNemesis();
+    moveNemesis();
 
+    checkHit();
+    displayHit();
 
+    requestAnimationFrame(gameLoop); //ChatGPT idea
+}
+
+function statusbar()
+{
+    ctx.font = "20px monospace";
+    ctx.fillStyle = "black";
+    ctx.fillText(`POINTS ${points}`, 50, 40);
+    ctx.fillText(`LIVES ${lives}`, 450, 40);
+}
+function displayHit()
+{
+    if (hit)
+    {
+        ctx.fillStyle = "black";
+        ctx.fillText("You got hit!", 210, 80);   
+    }
+}
 
 function checkHit()
 {
-    if(!hit && (nemesis.x-12) <= sprite.x && nemesis.x >= (sprite.x-12) && (sprite.y+30) >= 150 - nemesis.height)
-    {
-       console.log("BOOM!");
-       hit = true
-    }
+    if(!hit && 
+        (nemesis.x - nemesis.width) <= sprite.x &&
+         nemesis.x >= (sprite.x - sprite.width) &&
+          (sprite.y + sprite.height) >= gameBoard.height - nemesis.height)
+          {
+            hit = true
+          }
+
     else if (!hit && nemesis.x == 0)
     {
         points++;
@@ -76,30 +109,33 @@ function checkHit()
 
 
 
-
 function drawNemesis()
 {
     ctx.fillStyle = "red";
     ctx.fillRect(nemesis.x, nemesis.y, nemesis.width, nemesis.height);
 }
+
+
 function moveNemesis()
 {
-    nemesis.x -= nmySpd;
+    /*function doemijdiemaar()
+    {
+        return Math.floor(Math.random() * 135);
+    }*/
     
-
+    nemesis.x -= nemesis.speed;
     if (nemesis.x == 0)
     {
         setTimeout( ()=>{
-            nemesis.x = 312;
-        }, 1000);
-        
+            nemesis.x = gameBoard.width-nemesis.width;
+            //nemesis.y = doemijdiemaar();
+        }, 1000); 
     } 
-
 }
 
 function drawSprite()
 {
-    ctx.clearRect(0, 0, gameBoard.width, gameBoard.height);
+    
     ctx.fillStyle = "blue";
     ctx.fillRect(sprite.x, sprite.y, sprite.width, sprite.height);
 
@@ -124,15 +160,15 @@ function moveSprite(event)
                 sprite.y = 0;
                 break;
             }
-            
             break;
         
         case "ArrowDown":
 
             sprite.y += sprite.speed;
-            if (sprite.y >= 120)
+            if (sprite.y >= (gameBoard.height - sprite.height))
             {
-                sprite.y = 120;
+                sprite.y = (gameBoard.height - sprite.height);
+                console.log(gameBoard.height-sprite.height);
                 break;
             }
             break;
@@ -148,9 +184,9 @@ function moveSprite(event)
 
         case "ArrowRight":
             sprite.x += sprite.speed;
-            if (sprite.x >= 288)
+            if (sprite.x >= (gameBoard.width - sprite.width))
             {
-                sprite.x = 288;
+                sprite.x = (gameBoard.width - sprite.width);
                 break;
             }
             break;
@@ -162,16 +198,6 @@ function moveSprite(event)
     
 }
 
-function gameLoop() 
-{
-    drawSprite();
-    drawNemesis();
-    moveNemesis();
 
-    checkHit();
-
-
-    requestAnimationFrame(gameLoop);
-}
   
 gameLoop();
